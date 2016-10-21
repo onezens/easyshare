@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "WXApi.h"
 #import "WeiboSDK.h"
+#import "MainTableViewController.h"
 
 @interface AppDelegate ()<WeiboSDKDelegate>
 
@@ -21,7 +22,19 @@
     
     [WeiboSDK registerApp:@"2045436852"];
     [WXApi registerApp:@"wxd930ea5d5a258f4f"];
+    [self loadRootView];
+    
     return YES;
+}
+
+- (void)loadRootView {
+    
+    MainTableViewController *vc = [[MainTableViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.rootViewController = nav;
+    [self.window makeKeyAndVisible];
+    
 }
 
 - (void)didReceiveWeiboResponse:(WBBaseResponse *)response

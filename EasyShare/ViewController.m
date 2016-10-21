@@ -45,8 +45,6 @@
     
     WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message authInfo:authRequest access_token:nil];
     [WeiboSDK sendRequest:request];
-    
-    
 
 }
 

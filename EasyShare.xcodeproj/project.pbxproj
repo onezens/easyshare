@@ -28,6 +28,8 @@
 		D70231B71DBA27E1007241DA /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D70231B61DBA27E1007241DA /* libsqlite3.tbd */; };
 		D70231B91DBA27E7007241DA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D70231B81DBA27E7007241DA /* libz.tbd */; };
 		D70231BB1DBA27ED007241DA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D70231BA1DBA27ED007241DA /* SystemConfiguration.framework */; };
+		D70231BD1DBA29FF007241DA /* image_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D70231BC1DBA29FF007241DA /* image_2.jpg */; };
+		D70231C01DBA2AB4007241DA /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D70231BF1DBA2AB4007241DA /* MainTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +72,9 @@
 		D70231B61DBA27E1007241DA /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		D70231B81DBA27E7007241DA /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		D70231BA1DBA27ED007241DA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D70231BC1DBA29FF007241DA /* image_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image_2.jpg; sourceTree = "<group>"; };
+		D70231BE1DBA2AB4007241DA /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
+		D70231BF1DBA2AB4007241DA /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,12 +123,15 @@
 				D702318C1DBA2778007241DA /* lib */,
 				D70231781DBA26F1007241DA /* AppDelegate.h */,
 				D70231791DBA26F1007241DA /* AppDelegate.m */,
+				D70231BE1DBA2AB4007241DA /* MainTableViewController.h */,
+				D70231BF1DBA2AB4007241DA /* MainTableViewController.m */,
 				D702317B1DBA26F1007241DA /* ViewController.h */,
 				D702317C1DBA26F1007241DA /* ViewController.m */,
 				D702317E1DBA26F1007241DA /* Main.storyboard */,
 				D70231811DBA26F1007241DA /* Assets.xcassets */,
 				D70231831DBA26F1007241DA /* LaunchScreen.storyboard */,
 				D70231861DBA26F1007241DA /* Info.plist */,
+				D70231BC1DBA29FF007241DA /* image_2.jpg */,
 				D70231751DBA26F1007241DA /* Supporting Files */,
 			);
 			path = EasyShare;
@@ -257,6 +265,7 @@
 			files = (
 				D70231851DBA26F1007241DA /* LaunchScreen.storyboard in Resources */,
 				D70231821DBA26F1007241DA /* Assets.xcassets in Resources */,
+				D70231BD1DBA29FF007241DA /* image_2.jpg in Resources */,
 				D70231801DBA26F1007241DA /* Main.storyboard in Resources */,
 				D70231A31DBA2778007241DA /* WeiboSDK.bundle in Resources */,
 				D70231A61DBA2778007241DA /* README.txt in Resources */,
@@ -271,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D70231C01DBA2AB4007241DA /* MainTableViewController.m in Sources */,
 				D702317D1DBA26F1007241DA /* ViewController.m in Sources */,
 				D702317A1DBA26F1007241DA /* AppDelegate.m in Sources */,
 				D70231771DBA26F1007241DA /* main.m in Sources */,
@@ -401,7 +411,7 @@
 					"$(PROJECT_DIR)/EasyShare/lib/Wexin",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = cc.onezen.EasyShare;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sina.weibo.SNWeiboSDKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -420,7 +430,7 @@
 					"$(PROJECT_DIR)/EasyShare/lib/Wexin",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = cc.onezen.EasyShare;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sina.weibo.SNWeiboSDKDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
