@@ -32,13 +32,13 @@
         self.dataArr =  @[@"图片分享", @"音乐分享", @"视频分享", @"文本分享", @"网页分享"];
     }
     [self.tableView reloadData];
-   
+    
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
+    
     return self.dataArr.count;
 }
 
@@ -57,7 +57,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:true];
     if (self.controllerType == EasySharePlatform) {
         [self jumpPlatformShareStyle:indexPath.row];
     }else {
@@ -66,24 +66,35 @@
 }
 - (void)jumpToShareWithIndex:(NSInteger)index {
     
+    NSString *shareType = self.dataArr[index];
+    NSLog(@"%@ --- %@", self.title, shareType);
+    if ([shareType isEqualToString:@"图片分享"]) {
+        [EasyShare shareImage:[UIImage imageNamed:@"fengjing"] toPlat:self.platType];
+    }else if ([shareType isEqualToString:@"文本分享"]){
+        [EasyShare shareText:@"文本分享测试" toPlat:self.platType];
+    }else if ([shareType isEqualToString:@"网页分享"]){
+        [EasyShare shareWebWithTitle:@"网页分享标题" desc:@"网页分享描述网页分享描述网页分享描述" thumbImage:[UIImage imageNamed:@"image_2.jpg"] url:@"https://github.com/onezens/easyshare" toPlat:self.platType];
+    }else if ([shareType isEqualToString:@"视频分享"]){
+        [EasyShare shareVideoWithTitle:@"视频分享title" desc:@"视频分享desc" thumbImage:[UIImage imageNamed:@"image_2.jpg"] videoURL:@"http://flv2.bn.netease.com/videolib3/1609/03/JlkHt0155/SD/JlkHt0155-mobile.mp4" toPlat:self.platType];
+    }else if ([shareType isEqualToString:@"音乐分享"]){
+        [EasyShare shareVideoWithTitle:@"音乐分享title" desc:@"音乐分享desc" thumbImage:[UIImage imageNamed:@"image_2.jpg"] videoURL:@"http://music.baidu.com/song/1175705" toPlat:self.platType];
+    }
+    
 }
 
 - (void)jumpPlatformShareStyle:(NSInteger)index {
-    MainTableViewController *vc = [[MainTableViewController alloc] init];
-    vc.controllerType = EasyShareStyle;
-    vc.title = self.dataArr[index];
+
     if (index == 1 || index == 0) {
+        MainTableViewController *vc = [[MainTableViewController alloc] init];
+        vc.controllerType = EasyShareStyle;
+        vc.title = self.dataArr[index];
+        vc.platType = index;
         [self.navigationController pushViewController:vc animated:true];
-        
     }
 }
 
 - (void)back {
     [self.navigationController popViewControllerAnimated:true];
 }
-
-
-
-
 
 @end

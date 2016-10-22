@@ -23,7 +23,6 @@
 		D76094901DBB3A0A00F6C29D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D760946F1DBB3A0A00F6C29D /* LaunchScreen.storyboard */; };
 		D76094911DBB3A0A00F6C29D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D76094711DBB3A0A00F6C29D /* Main.storyboard */; };
 		D76094921DBB3A0A00F6C29D /* image_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D76094731DBB3A0A00F6C29D /* image_2.jpg */; };
-		D76094931DBB3A0A00F6C29D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D76094741DBB3A0A00F6C29D /* Info.plist */; };
 		D76094941DBB3A0A00F6C29D /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D76094771DBB3A0A00F6C29D /* libWeiboSDK.a */; };
 		D76094951DBB3A0A00F6C29D /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D76094811DBB3A0A00F6C29D /* WeiboSDK.bundle */; };
 		D76094961DBB3A0A00F6C29D /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D76094851DBB3A0A00F6C29D /* libWeChatSDK.a */; };
@@ -148,17 +147,17 @@
 		D760946B1DBB3A0A00F6C29D /* EasyShareDemo */ = {
 			isa = PBXGroup;
 			children = (
+				D76094751DBB3A0A00F6C29D /* lib */,
 				D760946C1DBB3A0A00F6C29D /* AppDelegate.h */,
 				D760946D1DBB3A0A00F6C29D /* AppDelegate.m */,
+				D760948C1DBB3A0A00F6C29D /* MainTableViewController.h */,
+				D760948D1DBB3A0A00F6C29D /* MainTableViewController.m */,
 				D760946E1DBB3A0A00F6C29D /* Assets.xcassets */,
 				D760946F1DBB3A0A00F6C29D /* LaunchScreen.storyboard */,
 				D76094711DBB3A0A00F6C29D /* Main.storyboard */,
 				D76094731DBB3A0A00F6C29D /* image_2.jpg */,
 				D76094741DBB3A0A00F6C29D /* Info.plist */,
-				D76094751DBB3A0A00F6C29D /* lib */,
 				D760948B1DBB3A0A00F6C29D /* main.m */,
-				D760948C1DBB3A0A00F6C29D /* MainTableViewController.h */,
-				D760948D1DBB3A0A00F6C29D /* MainTableViewController.m */,
 			);
 			path = EasyShareDemo;
 			sourceTree = "<group>";
@@ -267,7 +266,6 @@
 				D76094911DBB3A0A00F6C29D /* Main.storyboard in Resources */,
 				D760948F1DBB3A0A00F6C29D /* Assets.xcassets in Resources */,
 				D76094921DBB3A0A00F6C29D /* image_2.jpg in Resources */,
-				D76094931DBB3A0A00F6C29D /* Info.plist in Resources */,
 				D76094901DBB3A0A00F6C29D /* LaunchScreen.storyboard in Resources */,
 				D76094951DBB3A0A00F6C29D /* WeiboSDK.bundle in Resources */,
 				D76094981DBB3A0A00F6C29D /* README.txt in Resources */,
@@ -409,13 +407,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/EasyShare/lib/libWeiboSDK",
-					"$(PROJECT_DIR)/EasyShare/lib/Wexin",
 					"$(PROJECT_DIR)/EasyShareDemo/lib/libWeiboSDK",
 					"$(PROJECT_DIR)/EasyShareDemo/lib/Wexin",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sina.weibo.SNWeiboSDKDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = cc.onezen.EasyShareDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -430,13 +426,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/EasyShare/lib/libWeiboSDK",
-					"$(PROJECT_DIR)/EasyShare/lib/Wexin",
 					"$(PROJECT_DIR)/EasyShareDemo/lib/libWeiboSDK",
 					"$(PROJECT_DIR)/EasyShareDemo/lib/Wexin",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sina.weibo.SNWeiboSDKDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = cc.onezen.EasyShareDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

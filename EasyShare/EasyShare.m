@@ -12,17 +12,132 @@
 
 @implementation EasyShare
 
+#pragma mark - public share method
+
++ (void)shareImage:(UIImage *)image toPlat:(EasySharePlatType)plat {
+    
+    switch (plat) {
+        case EasySharePlatTypeWeixin:
+            [self wxShareImage:image];
+            break;
+        case EasySharePlatTypeWeibo:
+            [self wbShareImage:image];
+            break;
+        case EasySharePlatTypeQQ:
+            [self wbShareImage:image];
+            break;
+        case EasySharePlatTypeSys:
+            [self wbShareImage:image];
+            break;
+        case EasySharePlatTypeZhiFuBao:
+            [self wbShareImage:image];
+            break;
+        default:
+            break;
+    }
+}
+
++ (void)shareText:(NSString *)text toPlat:(EasySharePlatType)plat {
+    switch (plat) {
+        case EasySharePlatTypeWeixin:
+            [self wxShareText:text];
+            break;
+        case EasySharePlatTypeWeibo:
+            [self wbShareText:text];
+            break;
+        case EasySharePlatTypeQQ:
+            [self wbShareText:text];
+            break;
+        case EasySharePlatTypeSys:
+            [self wbShareText:text];
+            break;
+        case EasySharePlatTypeZhiFuBao:
+            [self wbShareText:text];
+            break;
+        default:
+            break;
+    }
+}
+
++ (void)shareWebWithTitle:(NSString *)title desc:(NSString *)desc thumbImage:(UIImage *)image url:(NSString *)url toPlat:(EasySharePlatType)plat {
+    
+    switch (plat) {
+        case EasySharePlatTypeWeixin:
+            [self wxShareWebWithTitle:title desc:desc thumbImage:image url:url];
+            break;
+        case EasySharePlatTypeWeibo:
+            [self wbShareWebWithTitle:title desc:desc thumbImage:image url:url];
+            break;
+        case EasySharePlatTypeQQ:
+            [self wbShareImage:image];
+            break;
+        case EasySharePlatTypeSys:
+            [self wbShareImage:image];
+            break;
+        case EasySharePlatTypeZhiFuBao:
+            [self wbShareImage:image];
+            break;
+        default:
+            break;
+    }
+}
+
++ (void)shareMusicWithTitle:(NSString *)title desc:(NSString *)desc thumbImage:(UIImage *)image musicURL:(NSString *)musicURL toPlat:(EasySharePlatType)plat{
+    switch (plat) {
+        case EasySharePlatTypeWeixin:
+            [self wxShareMusicWithTitle:title desc:desc thumbImage:image musicURL:musicURL];
+            break;
+        case EasySharePlatTypeWeibo:
+            [self wbShareMusicWithTitle:title desc:desc thumbImage:image musicURL:musicURL];
+            break;
+        case EasySharePlatTypeQQ:
+            [self wbShareImage:image];
+            break;
+        case EasySharePlatTypeSys:
+            [self wbShareImage:image];
+            break;
+        case EasySharePlatTypeZhiFuBao:
+            [self wbShareImage:image];
+            break;
+        default:
+            break;
+    }
+}
+
++ (void)shareVideoWithTitle:(NSString *)title desc:(NSString *)desc thumbImage:(UIImage *)image videoURL:(NSString *)videoURL toPlat:(EasySharePlatType)plat{
+    switch (plat) {
+        case EasySharePlatTypeWeixin:
+            [self wxShareVideoWithTitle:title desc:desc thumbImage:image videoURL:videoURL];
+            break;
+        case EasySharePlatTypeWeibo:
+            [self wbShareWebWithTitle:title desc:desc thumbImage:image url:videoURL];
+            break;
+        case EasySharePlatTypeQQ:
+            [self wbShareImage:image];
+            break;
+        case EasySharePlatTypeSys:
+            [self wbShareImage:image];
+            break;
+        case EasySharePlatTypeZhiFuBao:
+            [self wbShareImage:image];
+            break;
+        default:
+            break;
+    }
+}
+
+
 #pragma mark - weibo
 
-- (void)wbShareWeb {
++ (void)wbShareWebWithTitle:(NSString *)title desc:(NSString *)desc thumbImage:(UIImage *)image url:(NSString *)url {
     
     WBMessageObject *message = [WBMessageObject message];
     WBWebpageObject *webpage = [WBWebpageObject object];
     webpage.objectID = @"identifier1";
-    webpage.title = NSLocalizedString(@"分享网页标题", nil);
-    webpage.description = [NSString stringWithFormat:@"分享网页描述234234"];
-    webpage.thumbnailData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"image_2" ofType:@"jpg"]];
-    webpage.webpageUrl = @"http://music.baidu.com/song/1175705";
+    webpage.title = title;
+    webpage.description = desc;
+    webpage.thumbnailData = UIImageJPEGRepresentation(image, 0.8);
+    webpage.webpageUrl = url;
     message.mediaObject = webpage;
     
     WBAuthorizeRequest *authRequest = [WBAuthorizeRequest request];
@@ -34,14 +149,14 @@
     
 }
 
-- (void)wbShareText {
++ (void)wbShareText:(NSString *)text {
     
     WBAuthorizeRequest *authRequest = [WBAuthorizeRequest request];
     authRequest.redirectURI = @"http://www.sina.com";
     authRequest.scope = @"all";
     
     WBMessageObject *message = [WBMessageObject message];
-    message.text = NSLocalizedString(@"测试通过WeiboSDK发送文字到微博!", nil);
+    message.text = text;
     
     
     WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message authInfo:authRequest access_token:nil];
@@ -53,15 +168,15 @@
     [WeiboSDK sendRequest:request];
 }
 
-- (void)wbShareVideo {
++ (void)wbShareVideoWithTitle:(NSString *)title desc:(NSString *)desc thumbImage:(UIImage *)image videoURL:(NSString *)videoURL {
     
 }
 
-- (void)wbShareMusic {
++ (void)wbShareMusicWithTitle:(NSString *)title desc:(NSString *)desc thumbImage:(UIImage *)image musicURL:(NSString *)musicURL {
     
 }
 
-- (void)wbShareToPrivateMessage {
++ (void)wbShareToPrivateMessage {
     
     WBMessageObject *message = [WBMessageObject message];
     WBWebpageObject *webpage = [WBWebpageObject object];
@@ -78,17 +193,17 @@
     
 }
 
-- (void)wbShareImage {
++ (void)wbShareImage:(UIImage *)image {
     
     WBAuthorizeRequest *authRequest = [WBAuthorizeRequest request];
     authRequest.redirectURI = @"http://www.sina.com";
     authRequest.scope = @"all";
     
     WBMessageObject *message = [WBMessageObject message];
-    WBImageObject *image = [WBImageObject object];
+    WBImageObject *imageObj = [WBImageObject object];
     
-    image.imageData = UIImagePNGRepresentation([UIImage imageNamed:@"fengjing"]);
-    message.imageObject = image;
+    imageObj.imageData = UIImagePNGRepresentation(image);
+    message.imageObject = imageObj;
     
     WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message authInfo:authRequest access_token:nil];
     request.userInfo = @{@"ShareMessageFrom": @"SendMessageToWeiboViewController",
@@ -102,15 +217,15 @@
 
 #pragma mark - wexin
 
-- (void)wxShareWeb {
++ (void)wxShareWebWithTitle:(NSString *)title desc:(NSString *)desc thumbImage:(UIImage *)image url:(NSString *)url {
     
     WXMediaMessage *message = [WXMediaMessage message];
-    message.title = @"微信网页分享标题";
-    message.description = @"微信网页分享描述在这里";
-    [message setThumbImage:[UIImage imageNamed:@"fengjing_thumb"]];
+    message.title = title;
+    message.description = desc;
+    [message setThumbImage:image];
     
     WXWebpageObject *obj = [WXWebpageObject object];
-    obj.webpageUrl = @"http://www.wackosix.cn";
+    obj.webpageUrl = url;
     message.mediaObject = obj;
     
     SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
@@ -121,24 +236,24 @@
     [WXApi sendReq:req];
 }
 
-- (void)wxShareText {
++ (void)wxShareText:(NSString *)text {
     
     SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
-    req.text = @"微信分享文字测试。微信分享文字测试。微信分享文字测试。微信分享文字测试。";
+    req.text = text;
     req.bText = true;
     req.scene = WXSceneSession;
     [WXApi sendReq:req];
 }
 
-- (void)wxShareVideo {
++ (void)wxShareVideoWithTitle:(NSString *)title desc:(NSString *)desc thumbImage:(UIImage *)image videoURL:(NSString *)videoURL{
     
     WXMediaMessage *message = [WXMediaMessage message];
-    message.title = @"微信视频分享";
-    message.description = @"微信视频分享描述";
-    [message setThumbImage:[UIImage imageNamed:@"fengjing_thumb"]];
+    message.title = title;
+    message.description = desc;
+    [message setThumbImage:image];
     
     WXVideoObject *obj = [WXVideoObject object];
-    obj.videoUrl = @"http://flv2.bn.netease.com/videolib3/1609/03/JlkHt0155/SD/JlkHt0155-mobile.mp4";
+    obj.videoUrl = videoURL;
     obj.videoLowBandUrl = obj.videoUrl;
     message.mediaObject = obj;
     
@@ -150,15 +265,15 @@
     [WXApi sendReq:req];
 }
 
-- (void)wxShareMusic {
++ (void)wxShareMusicWithTitle:(NSString *)title desc:(NSString *)desc thumbImage:(UIImage *)image musicURL:(NSString *)musicURL{
     
     WXMediaMessage *message = [WXMediaMessage message];
-    message.title = @"微信音乐分享🎵";
-    message.description = @"微信音乐分享描述。微信音乐分享描述。微信音乐分享描述。微信音乐分享描述。微信音乐分享描述。";
-    [message setThumbImage:[UIImage imageNamed:@"fengjing_thumb"]];
+    message.title = title;
+    message.description = desc;
+    [message setThumbImage:image];
     
     WXMusicObject *ext = [WXMusicObject object];
-    ext.musicUrl = @"http://music.baidu.com/song/1175705";
+    ext.musicUrl = musicURL;
     ext.musicLowBandUrl = ext.musicUrl;
     ext.musicDataUrl = @"";
     ext.musicLowBandDataUrl = @"";
@@ -173,12 +288,10 @@
     
 }
 
-- (void)wxShareImage {
++ (void)wxShareImage:(UIImage *)image {
     
-    UIImage *image = [UIImage imageNamed:@"fengjing_thumb"];
     WXMediaMessage *message = [WXMediaMessage message];
     [message setThumbImage:image]; // 缩略图 大小不能超过32K
-    
     WXImageObject *ext = [WXImageObject object];
     ext.imageData  = UIImagePNGRepresentation([UIImage imageNamed:@"fengjing"]);
     message.mediaObject = ext;

@@ -18,5 +18,6 @@ typedef NS_ENUM(NSUInteger, EasyShareControlerType) {
 @interface MainTableViewController : UITableViewController
 
 @property (nonatomic, assign) EasyShareControlerType controllerType;
+@property (nonatomic, assign) EasySharePlatType platType;
 
 @end
