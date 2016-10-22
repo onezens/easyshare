@@ -30,6 +30,7 @@
 - (void)loadRootView {
     
     MainTableViewController *vc = [[MainTableViewController alloc] init];
+    vc.title = @"分享测试";
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = nav;

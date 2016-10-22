@@ -1,35 +1,21 @@
 //
-//  ViewController.m
-//  WSShareManager
+//  EasyShare.m
+//  EasyShare
 //
-//  Created by wangzhen on 16/9/3.
-//  Copyright © 2016年 www.wackosix.cn. All rights reserved.
+//  Created by wangzhen on 16/10/22.
+//  Copyright © 2016年 onezen.cc. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "EasyShare.h"
 #import "WXApi.h"
 #import "WeiboSDK.h"
 
-@interface ViewController ()
-
-@end
-
-@implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-}
-
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    
-    [self wbShareWeb];
-}
+@implementation EasyShare
 
 #pragma mark - weibo
 
 - (void)wbShareWeb {
-
+    
     WBMessageObject *message = [WBMessageObject message];
     WBWebpageObject *webpage = [WBWebpageObject object];
     webpage.objectID = @"identifier1";
@@ -38,25 +24,25 @@
     webpage.thumbnailData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"image_2" ofType:@"jpg"]];
     webpage.webpageUrl = @"http://music.baidu.com/song/1175705";
     message.mediaObject = webpage;
-
+    
     WBAuthorizeRequest *authRequest = [WBAuthorizeRequest request];
     authRequest.redirectURI = @"http://www.sina.com";
     authRequest.scope = @"all";
     
     WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message authInfo:authRequest access_token:nil];
     [WeiboSDK sendRequest:request];
-
+    
 }
 
 - (void)wbShareText {
-
+    
     WBAuthorizeRequest *authRequest = [WBAuthorizeRequest request];
     authRequest.redirectURI = @"http://www.sina.com";
     authRequest.scope = @"all";
     
     WBMessageObject *message = [WBMessageObject message];
     message.text = NSLocalizedString(@"测试通过WeiboSDK发送文字到微博!", nil);
-
+    
     
     WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message authInfo:authRequest access_token:nil];
     request.userInfo = @{@"ShareMessageFrom": @"SendMessageToWeiboViewController",
@@ -89,7 +75,7 @@
     WBShareMessageToContactRequest *request = [WBShareMessageToContactRequest requestWithMessage:message];
     request.userInfo = @{@"SendMessageFrom": @"SendMessageToWeiboViewController"};
     [WeiboSDK sendRequest:request];
-
+    
 }
 
 - (void)wbShareImage {
@@ -100,10 +86,10 @@
     
     WBMessageObject *message = [WBMessageObject message];
     WBImageObject *image = [WBImageObject object];
-
+    
     image.imageData = UIImagePNGRepresentation([UIImage imageNamed:@"fengjing"]);
     message.imageObject = image;
-
+    
     WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message authInfo:authRequest access_token:nil];
     request.userInfo = @{@"ShareMessageFrom": @"SendMessageToWeiboViewController",
                          @"Other_Info_1": [NSNumber numberWithInt:123],
@@ -203,5 +189,6 @@
     
     [WXApi sendReq:req];
 }
+
 
 @end

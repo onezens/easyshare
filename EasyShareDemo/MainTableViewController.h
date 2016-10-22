@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EasyShare.h"
+
+typedef NS_ENUM(NSUInteger, EasyShareControlerType) {
+    EasySharePlatform,
+    EasyShareStyle
+};
+
 
 @interface MainTableViewController : UITableViewController
+
+@property (nonatomic, assign) EasyShareControlerType controllerType;
 
 @end

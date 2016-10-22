@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:EasyShare.xcodeproj">
+      location = "self:/Users/wangzhen/Desktop/Zhen/git/easyshare/EasyShareDemo.xcodeproj">
    </FileRef>
 </Workspace>
