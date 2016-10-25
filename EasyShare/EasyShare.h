@@ -12,6 +12,7 @@ typedef NS_ENUM(NSUInteger, EasySharePlatType) {
     EasySharePlatTypeWeixin,
     EasySharePlatTypeWeibo,
     EasySharePlatTypeQQ,
+    EasySharePlatTypeQQZone,
     EasySharePlatTypeSys,
     EasySharePlatTypeZhiFuBao
 };
@@ -24,5 +25,9 @@ typedef NS_ENUM(NSUInteger, EasySharePlatType) {
 + (void)shareWebWithTitle:(NSString *)title desc:(NSString *)desc thumbImage:(UIImage *)image url:(NSString *)url toPlat:(EasySharePlatType)plat;
 + (void)shareVideoWithTitle:(NSString *)title desc:(NSString *)desc thumbImage:(UIImage *)image videoURL:(NSString *)videoURL toPlat:(EasySharePlatType)plat;
 + (void)shareMusicWithTitle:(NSString *)title desc:(NSString *)desc thumbImage:(UIImage *)image musicURL:(NSString *)musicURL toPlat:(EasySharePlatType)plat;
+
++ (void)qqzoneShareLocalVideoWithTitle:(NSString *)title;
++ (void)qqzoneShareLocalImageWithTitle:(NSString *)text;
+
 
 @end

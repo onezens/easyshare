@@ -27,7 +27,7 @@
     
     self.dataArr = [NSArray array];
     if (self.controllerType == EasySharePlatform) {
-        self.dataArr = @[@"微信分享", @"微博分享", @"QQ分享", @"系统分享", @"支付宝分享"];
+        self.dataArr = @[@"微信分享", @"微博分享", @"QQ分享", @"QQ空间分享", @"系统分享", @"支付宝分享"];
     }else if (self.controllerType == EasyShareStyle) {
         self.dataArr =  @[@"图片分享", @"音乐分享", @"视频分享", @"文本分享", @"网页分享"];
     }
@@ -78,14 +78,14 @@
         //http://flv2.bn.netease.com/videolib3/1609/03/JlkHt0155/SD/JlkHt0155-mobile.mp4
         [EasyShare shareVideoWithTitle:@"视频分享title" desc:@"视频分享desc" thumbImage:[UIImage imageNamed:@"image_2.jpg"] videoURL:@"http://www.miaopai.com/show/GZnTEp4dAqVus0jrMnvX4A__.htm" toPlat:self.platType];
     }else if ([shareType isEqualToString:@"音乐分享"]){
-        [EasyShare shareVideoWithTitle:@"音乐分享title" desc:@"音乐分享desc" thumbImage:[UIImage imageNamed:@"image_2.jpg"] videoURL:@"http://music.baidu.com/song/1175705" toPlat:self.platType];
+        [EasyShare shareMusicWithTitle:@"音乐分享title" desc:@"音乐分享desc" thumbImage:[UIImage imageNamed:@"image_2.jpg"] musicURL:@"http://music.baidu.com/song/1175705" toPlat:self.platType];
     }
     
 }
 
 - (void)jumpPlatformShareStyle:(NSInteger)index {
 
-    if (index == 1 || index == 0 || index == 2) {
+    if (index == 1 || index == 0 || index == 2 || index == 3) {
         MainTableViewController *vc = [[MainTableViewController alloc] init];
         vc.controllerType = EasyShareStyle;
         vc.title = self.dataArr[index];

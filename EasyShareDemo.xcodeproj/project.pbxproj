@@ -422,7 +422,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/EasyShareDemo/lib/QQ",
 				);
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/EasyShareDemo/lib/QQ/TencentOpenAPI.framework/Headers";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/EasyShareDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -449,7 +449,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/EasyShareDemo/lib/QQ",
 				);
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/EasyShareDemo/lib/QQ/TencentOpenAPI.framework/Headers";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/EasyShareDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

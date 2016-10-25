@@ -9,7 +9,7 @@
 #import "EasyShare.h"
 #import "WXApi.h"
 #import "WeiboSDK.h"
-#import "QQApiInterface.h"
+#import <TencentOpenAPI/QQApiInterface.h>
 
 @implementation EasyShare
 
@@ -26,6 +26,9 @@
             break;
         case EasySharePlatTypeQQ:
             [self qqShareImage:image];
+            break;
+        case EasySharePlatTypeQQZone:
+            [self qqzoneShareImage:image];
             break;
         case EasySharePlatTypeSys:
             [self wbShareImage:image];
@@ -48,6 +51,9 @@
             break;
         case EasySharePlatTypeQQ:
             [self qqShareText:text];
+            break;
+        case EasySharePlatTypeQQZone:
+            [self qqzoneShareText:text];
             break;
         case EasySharePlatTypeSys:
             [self wbShareText:text];
@@ -72,6 +78,9 @@
         case EasySharePlatTypeQQ:
             [self qqShareWebWithTitle:title desc:desc thumbImage:image url:url];
             break;
+        case EasySharePlatTypeQQZone:
+            [self qqzoneShareWebWithTitle:title desc:desc thumbImage:image url:url];
+            break;
         case EasySharePlatTypeSys:
             [self wbShareImage:image];
             break;
@@ -93,6 +102,9 @@
             break;
         case EasySharePlatTypeQQ:
             [self qqShareMusicWithTitle:title desc:desc thumbImage:image musicURL:musicURL];
+            break;
+        case EasySharePlatTypeQQZone:
+            [self qqzoneShareMusicWithTitle:title desc:desc thumbImage:image musicURL:musicURL];
             break;
         case EasySharePlatTypeSys:
             [self wbShareImage:image];
@@ -116,6 +128,9 @@
         case EasySharePlatTypeQQ:
             [self qqShareVideoWithTitle:title desc:desc thumbImage:image videoURL:videoURL];
             break;
+        case EasySharePlatTypeQQZone:
+            [self qqzoneShareVideoWithTitle:title desc:desc thumbImage:image videoURL:videoURL];
+            break;
         case EasySharePlatTypeSys:
             [self wbShareImage:image];
             break;
@@ -129,92 +144,64 @@
 
 #pragma mark - qqzone
 
++ (void)qqzoneShareLocalVideoWithTitle:(NSString *)title{
+    
+    // TODO: 创建一个图片和视频选择的控制器和页面
+    QQApiVideoForQZoneObject *video = [QQApiVideoForQZoneObject objectWithAssetURL:nil title:title];
+    SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:video];
+    QQApiSendResultCode sent = [QQApiInterface SendReqToQZone:req];
+    [self handleSendResult:sent];
+    
+}
++ (void)qqzoneShareLocalImageWithTitle:(NSString *)text {
+    // TODO: 创建一个图片和视频选择的控制器和页面
+    QQApiImageArrayForQZoneObject *img = [QQApiImageArrayForQZoneObject objectWithimageDataArray:nil title:text];
+    SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:img];
+    QQApiSendResultCode sent = [QQApiInterface SendReqToQZone:req];
+    [self handleSendResult:sent];
+}
+
+
+
 + (void)qqzoneShareWebWithTitle:(NSString *)title desc:(NSString *)desc thumbImage:(UIImage *)image url:(NSString *)url {
     
-    WXMediaMessage *message = [WXMediaMessage message];
-    message.title = title;
-    message.description = desc;
-    [message setThumbImage:image];
+    NSData *data = UIImageJPEGRepresentation(image, 1);
+    QQApiNewsObject* imgObj = [QQApiNewsObject objectWithURL:[NSURL URLWithString:url] title:title description:desc previewImageData:data];
+    [imgObj setTitle:title];
+    [imgObj setCflag:kQQAPICtrlFlagQZoneShareOnStart];
     
-    WXWebpageObject *obj = [WXWebpageObject object];
-    obj.webpageUrl = url;
-    message.mediaObject = obj;
+    SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:imgObj];
     
-    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
-    req.bText = false;
-    req.message = message;
-    req.scene = WXSceneSession;
+    QQApiSendResultCode sent = [QQApiInterface sendReq:req];
     
-    [WXApi sendReq:req];
+    [self handleSendResult:sent];
 }
 
 + (void)qqzoneShareText:(NSString *)text {
     
-    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
-    req.text = text;
-    req.bText = true;
-    req.scene = WXSceneSession;
-    [WXApi sendReq:req];
+    QQApiImageArrayForQZoneObject *obj = [QQApiImageArrayForQZoneObject objectWithimageDataArray:nil title:text];
+    SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:obj];
+    QQApiSendResultCode sent = [QQApiInterface SendReqToQZone:req];
+    [self handleSendResult:sent];
 }
 
 + (void)qqzoneShareVideoWithTitle:(NSString *)title desc:(NSString *)desc thumbImage:(UIImage *)image videoURL:(NSString *)videoURL{
     
-    WXMediaMessage *message = [WXMediaMessage message];
-    message.title = title;
-    message.description = desc;
-    [message setThumbImage:image];
-    
-    WXVideoObject *obj = [WXVideoObject object];
-    obj.videoUrl = videoURL;
-    obj.videoLowBandUrl = obj.videoUrl;
-    message.mediaObject = obj;
-    
-    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
-    req.bText = false;
-    req.message = message;
-    req.scene = WXSceneSession;
-    
-    [WXApi sendReq:req];
+    [self qqzoneShareWebWithTitle:title desc:desc thumbImage:image url:videoURL];
 }
 
 + (void)qqzoneShareMusicWithTitle:(NSString *)title desc:(NSString *)desc thumbImage:(UIImage *)image musicURL:(NSString *)musicURL{
     
-    WXMediaMessage *message = [WXMediaMessage message];
-    message.title = title;
-    message.description = desc;
-    [message setThumbImage:image];
-    
-    WXMusicObject *ext = [WXMusicObject object];
-    ext.musicUrl = musicURL;
-    ext.musicLowBandUrl = ext.musicUrl;
-    ext.musicDataUrl = @"";
-    ext.musicLowBandDataUrl = @"";
-    message.mediaObject = ext;
-    
-    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
-    req.bText = false;
-    req.message = message;
-    req.scene = WXSceneSession;
-    
-    [WXApi sendReq:req];
-    
+    [self qqzoneShareWebWithTitle:title desc:desc thumbImage:image url:musicURL];
 }
 
 + (void)qqzoneShareImage:(UIImage *)image {
     
-    WXMediaMessage *message = [WXMediaMessage message];
-    [message setThumbImage:image]; // 缩略图 大小不能超过32K
-    WXImageObject *ext = [WXImageObject object];
-    ext.imageData  = UIImagePNGRepresentation([UIImage imageNamed:@"fengjing"]);
-    message.mediaObject = ext;
-    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
-    req.bText   = NO;
-    req.message = message;
-    req.scene   = WXSceneSession;
-    
-    [WXApi sendReq:req];
+    QQApiImageArrayForQZoneObject *img = [QQApiImageArrayForQZoneObject objectWithimageDataArray:@[image] title:nil];
+    SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:img];
+    QQApiSendResultCode sent = [QQApiInterface SendReqToQZone:req];
+    [self handleSendResult:sent];
 }
-
 
 
 
@@ -408,7 +395,7 @@
     
     WBMessageObject *message = [WBMessageObject message];
     
-    WBMusicObject *obj = [WBVideoObject object];
+    WBMusicObject *obj = [WBMusicObject object];
     obj.objectID = @"identifierMusic";
     obj.title = title;
     obj.description = desc;
