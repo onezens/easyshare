@@ -75,7 +75,8 @@
     }else if ([shareType isEqualToString:@"网页分享"]){
         [EasyShare shareWebWithTitle:@"网页分享标题" desc:@"网页分享描述网页分享描述网页分享描述" thumbImage:[UIImage imageNamed:@"image_2.jpg"] url:@"https://github.com/onezens/easyshare" toPlat:self.platType];
     }else if ([shareType isEqualToString:@"视频分享"]){
-        [EasyShare shareVideoWithTitle:@"视频分享title" desc:@"视频分享desc" thumbImage:[UIImage imageNamed:@"image_2.jpg"] videoURL:@"http://flv2.bn.netease.com/videolib3/1609/03/JlkHt0155/SD/JlkHt0155-mobile.mp4" toPlat:self.platType];
+        //http://flv2.bn.netease.com/videolib3/1609/03/JlkHt0155/SD/JlkHt0155-mobile.mp4
+        [EasyShare shareVideoWithTitle:@"视频分享title" desc:@"视频分享desc" thumbImage:[UIImage imageNamed:@"image_2.jpg"] videoURL:@"http://www.miaopai.com/show/GZnTEp4dAqVus0jrMnvX4A__.htm" toPlat:self.platType];
     }else if ([shareType isEqualToString:@"音乐分享"]){
         [EasyShare shareVideoWithTitle:@"音乐分享title" desc:@"音乐分享desc" thumbImage:[UIImage imageNamed:@"image_2.jpg"] videoURL:@"http://music.baidu.com/song/1175705" toPlat:self.platType];
     }
@@ -84,7 +85,7 @@
 
 - (void)jumpPlatformShareStyle:(NSInteger)index {
 
-    if (index == 1 || index == 0) {
+    if (index == 1 || index == 0 || index == 2) {
         MainTableViewController *vc = [[MainTableViewController alloc] init];
         vc.controllerType = EasyShareStyle;
         vc.title = self.dataArr[index];

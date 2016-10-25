@@ -9,9 +9,12 @@
 #import "AppDelegate.h"
 #import "WXApi.h"
 #import "WeiboSDK.h"
+#import <TencentOpenAPI/TencentOAuth.h>
 #import "MainTableViewController.h"
 
 @interface AppDelegate ()<WeiboSDKDelegate>
+
+@property (nonatomic, strong) TencentOAuth *tencentOAuth;
 
 @end
 
@@ -23,6 +26,7 @@
     [WeiboSDK registerApp:@"2045436852"];
     [WXApi registerApp:@"wxd930ea5d5a258f4f"];
     [self loadRootView];
+    _tencentOAuth = [[TencentOAuth alloc] initWithAppId:@"222222" andDelegate:nil];
     
     return YES;
 }
@@ -70,7 +74,13 @@
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-    return [WeiboSDK handleOpenURL:url delegate:self ];
+    if ([TencentOAuth HandleOpenURL:url]) {
+        return true;
+    }else if ([WeiboSDK handleOpenURL:url delegate:self]){
+        return true;
+    }
+
+    return false;
 }
 - (void)didReceiveWeiboRequest:(WBBaseRequest *)request
 {

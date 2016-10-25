@@ -30,6 +30,8 @@
 		D76094981DBB3A0A00F6C29D /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = D76094871DBB3A0A00F6C29D /* README.txt */; };
 		D76094991DBB3A0A00F6C29D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D760948B1DBB3A0A00F6C29D /* main.m */; };
 		D760949A1DBB3A0A00F6C29D /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D760948D1DBB3A0A00F6C29D /* MainTableViewController.m */; };
+		D76E09881DBEF9B700E77201 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D76E09861DBEF9B700E77201 /* TencentOpenAPI.framework */; };
+		D76E09891DBEF9B700E77201 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D76E09871DBEF9B700E77201 /* TencentOpenApi_IOS_Bundle.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +77,8 @@
 		D760948B1DBB3A0A00F6C29D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D760948C1DBB3A0A00F6C29D /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
 		D760948D1DBB3A0A00F6C29D /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
+		D76E09861DBEF9B700E77201 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		D76E09871DBEF9B700E77201 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,7 @@
 				D76094941DBB3A0A00F6C29D /* libWeiboSDK.a in Frameworks */,
 				D76094961DBB3A0A00F6C29D /* libWeChatSDK.a in Frameworks */,
 				D70231B91DBA27E7007241DA /* libz.tbd in Frameworks */,
+				D76E09881DBEF9B700E77201 /* TencentOpenAPI.framework in Frameworks */,
 				D70231B71DBA27E1007241DA /* libsqlite3.tbd in Frameworks */,
 				D70231B51DBA27D7007241DA /* libc++.tbd in Frameworks */,
 				D70231B31DBA27CE007241DA /* Security.framework in Frameworks */,
@@ -165,6 +170,7 @@
 		D76094751DBB3A0A00F6C29D /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				D76E09851DBEF9B700E77201 /* QQ */,
 				D76094761DBB3A0A00F6C29D /* libWeiboSDK */,
 				D76094841DBB3A0A00F6C29D /* Wexin */,
 			);
@@ -202,6 +208,15 @@
 				D760948A1DBB3A0A00F6C29D /* WXApiObject.h */,
 			);
 			path = Wexin;
+			sourceTree = "<group>";
+		};
+		D76E09851DBEF9B700E77201 /* QQ */ = {
+			isa = PBXGroup;
+			children = (
+				D76E09861DBEF9B700E77201 /* TencentOpenAPI.framework */,
+				D76E09871DBEF9B700E77201 /* TencentOpenApi_IOS_Bundle.bundle */,
+			);
+			path = QQ;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,6 +278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D76E09891DBEF9B700E77201 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				D76094911DBB3A0A00F6C29D /* Main.storyboard in Resources */,
 				D760948F1DBB3A0A00F6C29D /* Assets.xcassets in Resources */,
 				D76094921DBB3A0A00F6C29D /* image_2.jpg in Resources */,
@@ -402,6 +418,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = J4N8RS9Y8V;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EasyShareDemo/lib/QQ",
+				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/EasyShareDemo/lib/QQ/TencentOpenAPI.framework/Headers";
 				INFOPLIST_FILE = "$(SRCROOT)/EasyShareDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -410,7 +431,10 @@
 					"$(PROJECT_DIR)/EasyShareDemo/lib/libWeiboSDK",
 					"$(PROJECT_DIR)/EasyShareDemo/lib/Wexin",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-fobjc-arc",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cc.onezen.EasyShareDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -421,6 +445,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = J4N8RS9Y8V;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EasyShareDemo/lib/QQ",
+				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/EasyShareDemo/lib/QQ/TencentOpenAPI.framework/Headers";
 				INFOPLIST_FILE = "$(SRCROOT)/EasyShareDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -429,7 +458,10 @@
 					"$(PROJECT_DIR)/EasyShareDemo/lib/libWeiboSDK",
 					"$(PROJECT_DIR)/EasyShareDemo/lib/Wexin",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-fobjc-arc",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cc.onezen.EasyShareDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
